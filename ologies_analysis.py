@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 from PIL import Image
 from os import path, getcwd
 import numpy as np
-import PyPDF2
+from urllib.request import unquote
 
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
@@ -18,7 +18,7 @@ def get_soup(webpage):
     return soup 
 
 def get_links(soup): 
-    """ Get links from a web page """
+    """ Get links from web page """
     http_link_list = [] 
     current_link = ''
     for link in soup.find_all('a', href=True):
@@ -27,25 +27,40 @@ def get_links(soup):
             http_link_list.append(current_link)
     return http_link_list 
 
-def read_pdf(pdf_link): 
-    pdfFileObject = open(pdf_link, 'rb') # create a pdf file object
-    pdfReader = PyPDF2.PdfFileReader(pdfFileObject) # creating a pdf reader object 
-    count = pdfReader.numPages
-    count
-# =============================================================================
-#     for i in range(count):
-#         page = pdfReader.getPage(i)
-#         output = page.extractText()
-#     output 
-# =============================================================================
-    
-    
 def get_episode_text(episode_list): 
     """get text from all episodes in list"""
     text_return = []
-    for i in episode_list: 
-        print(i)
-        soup = get_soup(i)
+    pdf_url = 'https://www.alieward.com' + episode_list[0]
+    print(pdf_url)
+    
+    # make HTTP GET request to fetch PDF bytes
+    pdf_response = requests.get(pdf_url)
+    print(pdf_response.content)
+    
+    
+    # write PDF to local file
+    #f.write(pdf_response.content)
+
+     #   text_return.append(pdf_response)
+    #return text_return
+
+'''
+def read_pdf(pdf_link): 
+    pdfFileObject = open(pdf_link, encoding="utf8") # create a pdf file object
+    pdfReader = PyPDF2.PdfFileReader(pdfFileObject) # creating a pdf reader object 
+    num_pages = pdfReader.numPages
+    text = ""
+    page = pdfReader.getPage(0)
+    text += page.extract_text() + "\n"
+
+
+    for i in range(count):
+        page = pdfReader.getPage(i)
+        output = page.extractText()
+     return output 
+'''
+
+
         
 # webpage
 url = 'https://www.alieward.com/ologies-extras'
@@ -57,5 +72,4 @@ soupout = get_soup(url)
 link_list = get_links(soupout)
 
 # test pdf extraction 
-pdf_text = read_pdf('Ologies+Aperiology.pdf')
-pdf_text
+pdf_text = get_episode_text(link_list)
