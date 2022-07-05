@@ -3,5 +3,5 @@ Word Cloud Project using Beautiful soup to scrape text data from podcast transcr
 Project description: 
 https://www.youtube.com/watch?v=k-gin1qfzi0
 
-Ologies Podcast transcript: 
-https://www.npr.org/podcasts/510338/all-guides
+NPR Lifekit Podcast transcript: 
+"https://www.npr.org/transcripts/1107456623"
