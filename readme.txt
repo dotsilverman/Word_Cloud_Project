@@ -5,3 +5,5 @@ https://www.youtube.com/watch?v=k-gin1qfzi0
 
 NPR Lifekit Podcast transcript: 
 "https://www.npr.org/transcripts/1107456623"
+
+{google_docs}http://www.example.com/docs/document.pdf{/google_docs}
